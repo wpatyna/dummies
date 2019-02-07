@@ -1,0 +1,43 @@
+.app-container {
+    background: #ECEFF1;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+
+}
+
+.gridContainer{
+
+    width: 100vw;
+    height: 100vw; /* 100/56.25 = 1.778 */
+    background: pink;
+    max-height: 100vh;
+    max-width: 100vh; /* 16/9 = 1.778 */
+    margin-right: auto;
+}
+
+.sidenav {
+    background: white;
+    width: 250px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.chartPopup {
+    bottom: 0;
+    left: 0;
+    background: white;
+    height: 402px;
+    width: 100%;
+    position: absolute;
+    box-shadow: 0 3px 15px 0 #333;
+}
+
+.closeButton {
+    position: absolute;
+    z-index: 9999;
+    background: transparent;
+    border: 0;
+}
