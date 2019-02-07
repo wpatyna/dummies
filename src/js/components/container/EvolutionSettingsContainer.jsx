@@ -87,7 +87,7 @@ class EvolutionSettingsContainer extends Component {
             <div className={style.details}>
                 <span>{this.translate[language].headCoords}: ({details.head.x}, {details.head.y})</span>
                 <span>{this.translate[language].torsoCoords}: ({details.torso.x}, {details.torso.y})</span>
-                <span>{this.translate[language].torsoRadius}: {details.torsoHRad}, {details.torsoVRad}</span>
+                <span>{this.translate[language].torsoRadius}: {details.torsoWidth}, {details.torsoHeight}</span>
                 <span>{this.translate[language].armAngle}: {details.leftArmAngle},{details.rightArmAngle}</span>
                 <span>{this.translate[language].legAngle}: {details.leftLegAngle}, {details.rightLegAngle}</span>
                 <span>{this.translate[language].handCoords}: ({details.leftHand.x}, {details.leftHand.y}), ({details.rightHand.x}, {details.rightHand.y})</span>

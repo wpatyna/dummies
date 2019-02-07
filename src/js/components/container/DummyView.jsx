@@ -21,10 +21,10 @@ class DummyView extends Component {
     drawDummyOnCanvas(ctx) {
         this.contextWrapper.setColor(ctx, "#999988");
         this.contextWrapper.fillOval(ctx,
-            Math.round(this.dummy.torso.x - this.dummy.torsoHRad),
-            Math.round(this.dummy.torso.y - this.dummy.torsoVRad),
-            Math.round(2 * this.dummy.torsoHRad),
-            Math.round(2 * this.dummy.torsoVRad)
+            Math.round(this.dummy.torso.x - this.dummy.torsoWidth),
+            Math.round(this.dummy.torso.y - this.dummy.torsoHeight),
+            Math.round(2 * this.dummy.torsoWidth),
+            Math.round(2 * this.dummy.torsoHeight)
         );
 
         this.contextWrapper.setColor(ctx, "#dddd00");
@@ -104,7 +104,7 @@ class DummyView extends Component {
             Math.round(this.dummy.head.x),
             Math.round(this.dummy.head.y),
             Math.round(this.dummy.torso.x),
-            Math.round(this.dummy.torso.y - this.torsoVRad)
+            Math.round(this.dummy.torso.y - this.torsoHeight)
         );
         this.contextWrapper.fillOval(ctx,
             Math.round(this.dummy.head.x - 16),

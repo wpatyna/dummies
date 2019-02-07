@@ -400,24 +400,24 @@ class DummyTargetContainer extends Component {
     };
 
     expandVerticallyButtonClicked = (event) => {
-        this.props.dummy.torsoVRad = this.props.dummy.torsoVRad + 1;
-        this.props.onChange({"torsoVRad": this.props.dummy.torsoVRad});
+        this.props.dummy.torsoHeight = this.props.dummy.torsoHeight + 1;
+        this.props.onChange({"torsoHeight": this.props.dummy.torsoHeight});
     };
 
     narrowVerticallyButtonClicked = (event) => {
-        this.props.dummy.torsoVRad = this.props.dummy.torsoVRad - 1;
-        this.props.onChange({"torsoVRad": this.props.dummy.torsoVRad});
+        this.props.dummy.torsoHeight = this.props.dummy.torsoHeight - 1;
+        this.props.onChange({"torsoHeight": this.props.dummy.torsoHeight});
     };
 
     expandHorizontallyButtonClicked = (event) => {
-        this.props.dummy.torsoHRad += 1;
-        this.props.onChange({"torsoHRad": this.props.dummy.torsoHRad});
+        this.props.dummy.torsoWidth += 1;
+        this.props.onChange({"torsoWidth": this.props.dummy.torsoWidth});
 
     };
 
     narrowHorizontallyButtonClicked = (event) => {
-        this.props.dummy.torsoHRad -= 1;
-        this.props.onChange({"torsoHRad": this.props.dummy.torsoHRad});
+        this.props.dummy.torsoWidth -= 1;
+        this.props.onChange({"torsoWidth": this.props.dummy.torsoWidth});
 
     };
 

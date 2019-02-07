@@ -13,8 +13,8 @@ import Chart from "src/js/components/container/Chart";
 import Point from "src/js/utils/Point";
 
 export const Body = Object.freeze({
-    torsoVRad: "torsoVRad",
-    torsoHRad: "torsoHRad",
+    torsoHeight: "torsoHeight",
+    torsoWidth: "torsoWidth",
     torso: "torso",
     leftLegAngle: "leftLegAngle",
     rightLegAngle: "rightLegAngle",

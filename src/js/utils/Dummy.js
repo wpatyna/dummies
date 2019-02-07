@@ -9,8 +9,8 @@ class Dummy {
             bodyParts = {}
         }
 
-        this._torsoVRad = bodyParts.torsoVRad || undefined;
-        this._torsoHRad = bodyParts.torsoHRad || undefined;
+        this._torsoHeight = bodyParts.torsoHeight || undefined;
+        this._torsoWidth = bodyParts.torsoWidth || undefined;
         this._torso = bodyParts.torso || new Point();
         this._leftLegAngle = bodyParts.leftLegAngle || undefined;
         this._rightLegAngle = bodyParts.rightLegAngle || undefined;
@@ -30,23 +30,23 @@ class Dummy {
         this._random = new Random();
     }
 
-    get torsoVRad() {
-        return this._torsoVRad;
+    get torsoHeight() {
+        return this._torsoHeight;
     }
 
-    set torsoVRad(torsoVRad) {
-        if (torsoVRad < 64 && torsoVRad > 0) {
-            this._torsoVRad = torsoVRad;
+    set torsoHeight(torsoHeight) {
+        if (torsoHeight < 64 && torsoHeight > 0) {
+            this._torsoHeight = torsoHeight;
         }
     }
 
-    get torsoHRad() {
-        return this._torsoHRad;
+    get torsoWidth() {
+        return this._torsoWidth;
     }
 
-    set torsoHRad(torsoHRad) {
-        if (torsoHRad < 64 && torsoHRad > 0) {
-            this._torsoHRad = torsoHRad;
+    set torsoWidth(torsoWidth) {
+        if (torsoWidth < 64 && torsoWidth > 0) {
+            this._torsoWidth = torsoWidth;
         }
     }
 
@@ -224,8 +224,8 @@ class Dummy {
 
     get bodyParts() {
         return {
-            [Body.torsoVRad]: this.torsoVRad,
-            [Body.torsoHRad]: this.torsoHRad,
+            [Body.torsoHeight]: this.torsoHeight,
+            [Body.torsoWidth]: this.torsoWidth,
             [Body.torso]: this.torso,
             [Body.leftLegAngle]: this.leftLegAngle,
             [Body.rightLegAngle]: this.rightLegAngle,
@@ -296,87 +296,57 @@ class Dummy {
                 this[part] = this._random.nextInt(63) + 1;
             }
         });
-        // this.head = [this._random.nextInt(128), this._random.nextInt(64)];
-        // this.torso = [32 + this._random.nextInt(64), 32 + this._random.nextInt(64)];
-        // this.torsoVRad = this._random.nextInt(63) + 1;
-        // this.torsoHRad = this._random.nextInt(63) + 1;
-        // this.leftHand = [this._random.nextInt(64), this._random.nextInt(64)];
-        // this.rightHand = [64 + this._random.nextInt(64), this._random.nextInt(64)];
-        // this.leftElbow = [this._random.nextInt(64), this._random.nextInt(64)];
-        // this.rightElbow = [64 + this._random.nextInt(64), this._random.nextInt(64)];
-        // this.leftArmAngle = this._random.nextInt(63);
-        // this.rightArmAngle = this._random.nextInt(63);
-        // this.leftToe = [this._random.nextInt(64), 64 + this._random.nextInt(64)];
-        // this.rightToe = [64 + this._random.nextInt(64), 64 + this._random.nextInt(64)];
-        // this.leftHeel = [this._random.nextInt(64), 64 + this._random.nextInt(64)];
-        // this.rightHeel = [64 + this._random.nextInt(64), 64 + this._random.nextInt(64)];
-        // this.leftKnee = [this._random.nextInt(64), 64 + this._random.nextInt(64)];
-        // this.rightKnee = [64 + this._random.nextInt(64), 64 + this._random.nextInt(64)];
-        // this.leftLegAngle = this._random.nextInt(63)+1;
-        // this.rightLegAngle = this._random.nextInt(63)+1;
 
     }
 
     initialize() {
-        this.torso.x = 63;
-        this.torso.y = 73;
-        this.torsoVRad = 30;
-        this.torsoHRad = 25;
+        this.torso = [63,73];
+        this.torsoHeight = 30;
+        this.torsoWidth = 25;
         this.leftLegAngle = 60;
-        this.leftKnee.x = 23;
-        this.leftKnee.y = 103;
-        this.leftHeel.x = 33;
-        this.leftHeel.y = 123;
-        this.leftToe.x = 13;
-        this.leftToe.y = 125;
+        this.leftKnee = [23, 103];
+        this.leftHeel = [33,123];
+        this.leftToe = [13, 125];
         this.rightLegAngle = 60;
-        this.rightKnee.x = 103;
-        this.rightKnee.y = 103;
-        this.rightHeel.x = 93;
-        this.rightHeel.y = 123;
-        this.rightToe.x = 113;
-        this.rightToe.y = 125;
+        this.rightKnee = [103, 103];
+        this.rightHeel = [93, 123];
+        this.rightToe = [113, 125];
         this.leftArmAngle = 20;
-        this.leftElbow.x = 13;
-        this.leftElbow.y = 43;
-        this.leftHand.x = 3;
-        this.leftHand.y = 73;
+        this.leftElbow = [13, 43];
+        this.leftHand = [3, 73];
         this.rightArmAngle = 20;
-        this.rightElbow.x = 113;
-        this.rightElbow.y = 43;
-        this.rightHand.x = 123;
-        this.rightHand.y = 73;
-        this.head.x = 63;
-        this.head.y = 20;
+        this.rightElbow = [113, 43];
+        this.rightHand = [123, 73];
+        this.head = [63, 20];
     }
 
     calculateLimbPosition(degree){
-        let x = this.torsoHRad * Math.cos(this.deg2rad(degree)) + this.torso.x;
-        let y = this.torsoVRad * Math.sin(this.deg2rad(degree)) + this.torso.y;
+        let x = this.torsoWidth * Math.cos(this.deg2rad(degree)) + this.torso.x;
+        let y = this.torsoHeight * Math.sin(this.deg2rad(degree)) + this.torso.y;
         return new Point(Math.round(x), Math.round(y));
     }
 
     calcLeftLegAnchor() {
-        let x = this.torsoHRad * Math.cos(this.deg2rad(this.leftLegAngle + 90)) + this.torso.x;
-        let y = this.torsoVRad * Math.sin(this.deg2rad(this.leftLegAngle + 90)) + this.torso.y;
+        let x = this.torsoWidth * Math.cos(this.deg2rad(this.leftLegAngle + 90)) + this.torso.x;
+        let y = this.torsoHeight * Math.sin(this.deg2rad(this.leftLegAngle + 90)) + this.torso.y;
         return new Point(Math.round(x), Math.round(y));
     }
 
     calcRightLegAnchor() {
-        let x = -(this.torsoHRad * Math.cos(this.deg2rad(this.rightLegAngle + 90))) + this.torso.x;
-        let y = this.torsoVRad * Math.sin(this.deg2rad(this.rightLegAngle + 90)) + this.torso.y;
+        let x = -(this.torsoWidth * Math.cos(this.deg2rad(this.rightLegAngle + 90))) + this.torso.x;
+        let y = this.torsoHeight * Math.sin(this.deg2rad(this.rightLegAngle + 90)) + this.torso.y;
         return new Point(Math.round(x), Math.round(y));
     }
 
     calcLeftArmAnchor() {
-        let x = -(this.torsoHRad * Math.cos(this.deg2rad(this.leftArmAngle + 270))) + this.torso.x;
-        let y = this.torsoVRad * Math.sin(this.deg2rad(this.leftArmAngle + 270)) + this.torso.y;
+        let x = -(this.torsoWidth * Math.cos(this.deg2rad(this.leftArmAngle + 270))) + this.torso.x;
+        let y = this.torsoHeight * Math.sin(this.deg2rad(this.leftArmAngle + 270)) + this.torso.y;
         return new Point(Math.round(x), Math.round(y));
     }
 
     calcRightArmAnchor() {
-        let x = this.torsoHRad * Math.cos(this.deg2rad(this.rightArmAngle + 270)) + this.torso.x;
-        let y = this.torsoVRad * Math.sin(this.deg2rad(this.rightArmAngle + 270)) + this.torso.y;
+        let x = this.torsoWidth * Math.cos(this.deg2rad(this.rightArmAngle + 270)) + this.torso.x;
+        let y = this.torsoHeight * Math.sin(this.deg2rad(this.rightArmAngle + 270)) + this.torso.y;
         return new Point(Math.round(x), Math.round(y));
     }
 
