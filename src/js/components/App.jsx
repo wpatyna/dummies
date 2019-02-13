@@ -12,6 +12,8 @@ import Evolution from "src/js/utils/Evolution";
 import Chart from "src/js/components/container/Chart";
 import Point from "src/js/utils/Point";
 
+import remove from "../../icons/delete.svg"
+
 export const Body = Object.freeze({
     torsoHeight: "torsoHeight",
     torsoWidth: "torsoWidth",
@@ -57,7 +59,7 @@ class App extends Component {
             settings: {
                 iteration: {description: {pl: "Iteracje", en: "Iteration"}, min: 1, max: 100, step: 1, value: 10},
                 selectivePressure: {
-                    description: {pl: "Napór selektywny", en: "Selective pressure"},
+                    description: {pl: "Napór selekcyjny", en: "Selective pressure"},
                     min: 0.1,
                     max: 10,
                     step: 0.1,
@@ -71,7 +73,7 @@ class App extends Component {
                     value: mutationProp
                 },
                 populationSize: {description: {pl: "Rozmiar populacji", en: "Population size"}, min: 4, max: 36, step: 1, value: populationSize},
-                childrenSize: {description: {pl: "Liczonść potomstwa", en: "Children count"}, min: 0, max: 10, step: 1, value: 1}
+                childrenSize: {description: {pl: "Liczonść potomstwa", en: "Children count"}, min: 0, max: evolution.maxChildrenCount, step: 1, value: 1}
             }
         };
         window.onresize = (event) => {
@@ -209,7 +211,7 @@ class App extends Component {
                 </div>
                 {this.state.showChart ?
                     (<div className={style.chartPopup}>
-                        <button className={style.closeButton} onClick={this.hideChart}>X</button>
+                        <button className={style.closeButton} onClick={this.hideChart}><img className={style.remove} src={remove}/></button>
                         <Chart className={style.chart} language={language} history={history}/>
 
                     </div>) : false

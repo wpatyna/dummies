@@ -43,15 +43,16 @@ module.exports = {
                 ]
             },
             {
-                test: /\.(png|jp(e*)g|svg)$/,
-                use: [{
-                    loader: 'url-loader',
-                    options: {
-                        limit: 8000, // Convert images < 8kb to base64 strings
-                        name: 'images/[hash]-[name].[ext]'
-                    }
-                }]
-            }
+                test: /\.(jpg|png|gif|svg|pdf|ico)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[path][name]-[hash:8].[ext]'
+                        },
+                    },
+                ]
+            },
         ]
     },
     plugins: [

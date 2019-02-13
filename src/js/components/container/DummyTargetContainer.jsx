@@ -10,6 +10,11 @@ import Point from "src/js/utils/Point";
 
 import * as guid from "guid"
 
+import arrowLeft from "../../../icons/arrow-left.svg"
+import rotateLeft from "../../../icons/rotate-left.svg"
+import narrow from "../../../icons/narrow-diagonal.svg"
+import expand from "../../../icons/expand-diagonal.svg"
+
 class DummyTargetContainer extends Component {
     constructor(props) {
         super(props);
@@ -30,29 +35,29 @@ class DummyTargetContainer extends Component {
         };
         this.translate = {
             pl: {
-                up: "G",
-                down: "D",
-                left: "L",
-                right: "P",
-                turnLeft: "OL",
-                turnRight: "OP",
-                narrowVertically: "ZG",
-                narrowHorizontally: "ZB",
-                expandVertically: "RB",
-                expandHorizontally: "RG",
+                up: "Przesuń obiekt do góry",
+                down: "Przesuń obiekt w dół",
+                left: "Przesuń obiekt w lewo",
+                right: "Przesuń obiekt w prawo",
+                turnLeft: "Obróć obiekt w lewo",
+                turnRight: "Obróć obiekt w prawo",
+                narrowVertically: "Zwęź obiekt w pionie",
+                narrowHorizontally: "Zwęź obiekt w poziomie",
+                expandVertically: "Rozszerz obiekt w pionie",
+                expandHorizontally: "Rozszerz obiekt w poziomie",
             },
 
             en: {
-                up: "U",
-                down: "D",
-                left: "L",
-                right: "R",
-                turnLeft: "TL",
-                turnRight: "TP",
-                narrowVertically: "NV",
-                narrowHorizontally: "NH",
-                expandVertically: "EV",
-                expandHorizontally: "EH",
+                up: "Move an object up",
+                down: "Move an object down",
+                left: "Move an object left",
+                right: "Move an object right",
+                turnLeft: "Turn an object left",
+                turnRight: "Turn an object right",
+                narrowVertically: "Narrow an object vertically",
+                narrowHorizontally: "Narrow an object horizontally",
+                expandVertically: "Expand an object vertically",
+                expandHorizontally: "Expand an object horizontally",
 
             }
         };
@@ -170,20 +175,20 @@ class DummyTargetContainer extends Component {
                     </div>
                     {<DummyView dummy={dummy} key={guid.raw()}/>}
                 </div>
-                <div>
-                    <button onClick={this.upButtonClicked} disabled={!buttons.up}>{this.translate[language].up}</button>
-                    <button onClick={this.downButtonClicked} disabled={!buttons.down}>{this.translate[language].down}</button>
-                    <button onClick={this.rightButtonClicked} disabled={!buttons.right}>{this.translate[language].right}</button>
-                    <button onClick={this.leftButtonClicked} disabled={!buttons.left}>{this.translate[language].left}</button>
-                    <button onClick={this.turnLeftButtonClicked} disabled={!buttons.turnLeft}>{this.translate[language].turnLeft}</button>
-                    <button onClick={this.turnRightButtonClicked} disabled={!buttons.turnRight}>{this.translate[language].turnRight}</button>
-                    <button onClick={this.expandVerticallyButtonClicked} disabled={!buttons.expandVertically}>{this.translate[language].expandVertically}
+                <div className={style.panelButtonContainer}>
+                    <button className={style.panelButton} onClick={this.upButtonClicked} disabled={!buttons.up} title={this.translate[language].up}><img className={style.upArrow} src={arrowLeft}/></button>
+                    <button className={style.panelButton} onClick={this.downButtonClicked} disabled={!buttons.down} title={this.translate[language].down}><img className={style.downArrow} src={arrowLeft}/></button>
+                    <button className={style.panelButton} onClick={this.rightButtonClicked} disabled={!buttons.right} title={this.translate[language].right}><img className={style.rightArrow} src={arrowLeft}/></button>
+                    <button className={style.panelButton} onClick={this.leftButtonClicked} disabled={!buttons.left} title={this.translate[language].left}><img className={style.leftArrow} src={arrowLeft}/></button>
+                    <button className={style.panelButton} onClick={this.turnLeftButtonClicked} disabled={!buttons.turnLeft} title={this.translate[language].turnLeft}><img className={style.rotateLeft} src={rotateLeft}/></button>
+                    <button className={style.panelButton} onClick={this.turnRightButtonClicked} disabled={!buttons.turnRight} title={this.translate[language].turnRight}><img className={style.rotateRight} src={rotateLeft}/></button>
+                    <button className={style.panelButton} onClick={this.expandVerticallyButtonClicked} disabled={!buttons.expandVertically} title={this.translate[language].expandVertically}><img className={style.expandVertically} src={expand}/>
                     </button>
-                    <button onClick={this.narrowVerticallyButtonClicked} disabled={!buttons.narrowVertically}>{this.translate[language].narrowVertically}
+                    <button className={style.panelButton} onClick={this.narrowVerticallyButtonClicked} disabled={!buttons.narrowVertically} title={this.translate[language].narrowVertically}><img className={style.narrowVertically} src={narrow}/>
                     </button>
-                    <button onClick={this.expandHorizontallyButtonClicked} disabled={!buttons.expandHorizontally}>{this.translate[language].expandHorizontally}
+                    <button className={style.panelButton} onClick={this.expandHorizontallyButtonClicked} disabled={!buttons.expandHorizontally} title={this.translate[language].expandHorizontally}><img className={style.expandHorizontally} src={expand}/>
                     </button>
-                    <button onClick={this.narrowHorizontallyButtonClicked} disabled={!buttons.narrowHorizontally}>{this.translate[language].narrowHorizontally}
+                    <button className={style.panelButton} onClick={this.narrowHorizontallyButtonClicked} disabled={!buttons.narrowHorizontally} title={this.translate[language].narrowHorizontally}><img className={style.narrowHorizontally} src={narrow}/>
                     </button>
                 </div>
             </div>
@@ -387,13 +392,13 @@ class DummyTargetContainer extends Component {
     };
 
     turnLeftButtonClicked = (event) => {
-        this.props.dummy[this.state.focused] += 1;
+        this.props.dummy[this.state.focused] -= 1;
 
         this.props.onChange({[this.state.focused]: this.props.dummy[this.state.focused]});
     };
 
     turnRightButtonClicked = (event) => {
-        this.props.dummy[this.state.focused] -= 1;
+        this.props.dummy[this.state.focused] += 1;
 
         this.props.onChange({[this.state.focused]: this.props.dummy[this.state.focused]});
 

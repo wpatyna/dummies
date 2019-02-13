@@ -38,6 +38,25 @@
 .closeButton {
     position: absolute;
     z-index: 9999;
-    background: transparent;
+    background: #03A9F4;
     border: 0;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    margin: 3px;
+}
+
+.closeButton:hover{
+    background: #0288D1;
+}
+
+.closeButton:active{
+    background: #0277BD;
+}
+
+.remove {
+    width: 12px;
 }

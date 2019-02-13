@@ -52,4 +52,61 @@
     border: 1px solid indianred;
 }
 
+.panelButtonContainer{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    flex-direction: row;
+}
+.panelButton{
+    background: #03A9F4;
+    border: 0;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    margin: 3px;
 
+}
+
+.panelButton:hover{
+    background: #0288D1;
+}
+
+.panelButton:active{
+    background: #0277BD;
+}
+.panelButton:disabled, .panelButton[disabled]{
+    opacity: 0.6;
+    background: #03A9F4;
+}
+.upArrow, .rightArrow, .leftArrow, .downArrow, .rotateLeft, .rotateRight, .expandVertically, .narrowVertically, .expandHorizontally, .narrowHorizontally{
+    width: 12px;
+}
+
+.upArrow{
+    transform: rotate(90deg);
+}
+
+.rightArrow{
+    transform: rotate(180deg);
+}
+
+.downArrow{
+    transform: rotate(-90deg);
+}
+
+.rotateRight {
+    transform: scaleY(-1) rotate(180deg);
+}
+
+.expandVertically, .narrowVertically{
+    transform: rotate(135deg);
+}
+
+
+.expandHorizontally, .narrowHorizontally{
+    transform: rotate(45deg);
+}

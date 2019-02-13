@@ -50,7 +50,9 @@ class DummiesGridContainer extends Component {
         const focused = this.props.focusedDummy;
         return (
             <div className={style.container}>
-                {this.renderGrid(dummies, focused)}
+                <div className={style.squareContainer}>
+                    {this.renderGrid(dummies, focused)}
+                </div>
             </div>
         )
     }
@@ -69,6 +71,11 @@ class DummiesGridContainer extends Component {
                 </div>
             );
 
+        }
+        if (columnSize > columnCount){
+            grid.push(
+                <div className={style.column} key={grid.length}/>
+            );
         }
         return grid
 
