@@ -62,34 +62,25 @@ class Evolution {
         return this._population;
     }
 
-
     step() {
-        let parents = this.select();
-
         for (let i = 0; i < this.childrenCount; ++i) {
-            let secondParentId = this.rand.nextInt(this.parentCount - i);
-            let secondParent = parents[secondParentId];
-            parents.splice(secondParentId, 1);
-            this._population[i] = secondParent;
-            let firstParentId = this.rand.nextInt(this.parentCount - (i + 1));
-            let firstParent = parents[firstParentId];
+            let secondParentId = this.rand.nextInt(this.population.length);
+            let secondParent = this.population[secondParentId];
+            let firstParentId = this.rand.nextInt(this.population.length);
+            let firstParent = this.population[firstParentId];
 
             let child = firstParent.crossover(secondParent);
             child.mutate(this.mutProb);
 
-            this._population[this._population.length - (i + 1)] = child;
+            this._population[firstParentId] = child;
         }
-
-        for (let i = 0; i < parents.length; ++i) {
-            this._population[this.childrenCount + i] = parents[i];
-        }
-
         this.recalculateDummyWrappers();
+        this._population = this.select();
     }
 
     select(){
         let parents = [];
-        for (let i = 0; i < this.parentCount; ++i) {
+        for (let i = 0; i < this.population.length; ++i) {
             let roulettePoint = this.rand.nextDouble();
             if (roulettePoint <= this.dummyWrappers[0].rouletteProb){
                 parents.push(this.dummyWrappers[0].dummy);
@@ -123,16 +114,20 @@ class Evolution {
 
         let probOfSelection = 0;
 
+        // console.log(this.dummyWrappers);
         this.dummyWrappers = this.dummyWrappers.map(dummyWrapper => {
             const currProbOfSelection = dummyWrapper.score / this.totalScore;
             probOfSelection += currProbOfSelection;
-           return{
+            // console.log(probOfSelection,currProbOfSelection);
+
+            return{
                ...dummyWrapper,
                probOfSelection: currProbOfSelection,
                rouletteProb: probOfSelection
            }
         });
 
+        // console.log(this.dummyWrappers);
         const statistics = this.getStatistics();
         this.statisticsHistory.push({distance: statistics.avg, std: statistics.std});
     }
