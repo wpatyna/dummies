@@ -82,10 +82,16 @@
     opacity: 0.6;
     background: #03A9F4;
 }
-.upArrow, .rightArrow, .leftArrow, .downArrow, .rotateLeft, .rotateRight, .expandVertically, .narrowVertically, .expandHorizontally, .narrowHorizontally{
+.upArrow, .rightArrow, .leftArrow, .downArrow{
     width: 12px;
 }
+.rotateLeft, .rotateRight, .expandVertically, .narrowVertically, .expandHorizontally, .narrowHorizontally{
+    width: 15px;
+}
 
+.biggerIcon{
+    width: 20px;
+}
 .upArrow{
     transform: rotate(90deg);
 }

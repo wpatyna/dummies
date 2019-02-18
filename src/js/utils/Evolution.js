@@ -114,11 +114,9 @@ class Evolution {
 
         let probOfSelection = 0;
 
-        // console.log(this.dummyWrappers);
         this.dummyWrappers = this.dummyWrappers.map(dummyWrapper => {
             const currProbOfSelection = dummyWrapper.score / this.totalScore;
             probOfSelection += currProbOfSelection;
-            // console.log(probOfSelection,currProbOfSelection);
 
             return{
                ...dummyWrapper,
@@ -127,7 +125,6 @@ class Evolution {
            }
         });
 
-        // console.log(this.dummyWrappers);
         const statistics = this.getStatistics();
         this.statisticsHistory.push({distance: statistics.avg, std: statistics.std});
     }

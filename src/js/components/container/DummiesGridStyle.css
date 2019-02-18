@@ -23,7 +23,7 @@
     min-height: 0;
 }
 
-.dummyWrapper {
+.dummyWrapper, .emptyDummyWrapper {
     display: flex;
     box-sizing: border-box;
     flex: 1;
@@ -42,4 +42,14 @@
 
 .focused {
     outline: 2px solid #03A9F4
+}
+
+.dummyWrapper, .squareContainer, .container, .column {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
 }

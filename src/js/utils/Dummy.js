@@ -266,9 +266,40 @@ class Dummy {
         for (let i = 0; i < randomMax; ++i) {
             if (this._random.nextDouble() <= probability) {
                 const bodyPartKey = bodyParts[this._random.nextInt(randomMax)];
-                if (typeof this.bodyParts[bodyPartKey] === 'object'){
+                if (bodyPartKey === Body.head){
+
+                    let tmp = this.mutateVar(this[bodyPartKey].x, 7);
+                    if (tmp - 16 >= 0 &&  tmp + 16 <= 128){
+                        this[bodyPartKey].x = tmp;
+                    }
+                    tmp = this.mutateVar(this[bodyPartKey].y, 7);
+                    if (tmp - 16 >= 0 && tmp + 16 <= 128){
+                        this[bodyPartKey].y = tmp;
+                    }
+                }else if (bodyPartKey === Body.torso){
+
+                    let tmp = this.mutateVar(this[bodyPartKey].x, 7);
+                    if (tmp - this.torsoWidth >= 0 &&  tmp + this.torsoWidth <= 128){
+                        this[bodyPartKey].x = tmp;
+                    }
+                    tmp = this.mutateVar(this[bodyPartKey].y, 7);
+                    if (tmp - this.torsoHeight >= 0 && tmp + this.torsoHeight <= 128){
+                        this[bodyPartKey].y = tmp;
+                    }
+                }
+                else if (typeof this.bodyParts[bodyPartKey] === 'object'){
                     this[bodyPartKey].x = this.mutateVar(this[bodyPartKey].x, 7);
                     this[bodyPartKey].y = this.mutateVar(this[bodyPartKey].y, 7);
+                } else if(bodyPartKey === Body.torsoHeight) {
+                    let tmp = this.mutateVar(this[bodyPartKey], 6);
+                    if (this.torso.y - tmp >= 0 && this.torso.y + tmp <= 128) {
+                        this[bodyPartKey] = tmp;
+                    }
+                } else if(bodyPartKey === Body.torsoWidth) {
+                    let tmp = this.mutateVar(this[bodyPartKey], 6);
+                    if (this.torso.x - tmp >= 0 && this.torso.x + tmp <= 128) {
+                        this[bodyPartKey] = tmp;
+                    }
                 }
                 else {
                     this[bodyPartKey] = this.mutateVar(this[bodyPartKey], 6);
@@ -289,7 +320,12 @@ class Dummy {
     randomize() {
 
         Object.keys(this.bodyParts).forEach(part => {
-            if (typeof this.bodyParts[part] === 'object'){
+            if (part === Body.head){
+                this[part] = [16 + this._random.nextInt(128 - 16 - 16), 16 + this._random.nextInt(64 - 16 - 16)];
+            } else if (part === Body.torso){
+                this[part] = [this.torsoWidth + this._random.nextInt(128 - 2 * this.torsoWidth), this.torsoHeight + this._random.nextInt(64 - this.torsoHeight)];
+            }
+            else if (typeof this.bodyParts[part] === 'object'){
                 this[part] = [this._random.nextInt(128), this._random.nextInt(64)];
             }
             else {

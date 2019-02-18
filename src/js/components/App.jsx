@@ -192,12 +192,6 @@ class App extends Component {
         return (
             <div className={style["app-container"]}>
 
-                {/*<div ref={this.gridContainer}>*/}
-                <DummiesGridContainer dummies={dummies}
-                                      focusedDummy={focusedDummy}
-                                      onShowDetails={this.showDetails}/>
-                {/*</div>*/}
-
                 <div className={style.sidenav}>
                     <DummyTargetContainer dummy={targetDummy} language={language} onChange={this.targetChanged}/>
                     <EvolutionSettingsContainer onRandomize={this.randomizeGrid}
@@ -216,6 +210,11 @@ class App extends Component {
 
                     </div>) : false
                 }
+                {/*<div ref={this.gridContainer}>*/}
+                <DummiesGridContainer dummies={dummies}
+                                      focusedDummy={focusedDummy}
+                                      onShowDetails={this.showDetails}/>
+                {/*</div>*/}
             </div>
         )
     }

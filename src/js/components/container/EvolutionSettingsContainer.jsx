@@ -10,7 +10,7 @@ class EvolutionSettingsContainer extends Component {
         this.translate = {
             pl: {
                 evolve:"Ewoluuj",
-                randomize: "Losuj populacje",
+                randomize: "Losuj populację",
                 showChart: "Wykres dopasowania",
                 headCoords: "współrzedne głowy",
                 torsoCoords: "współrzedne tułowia",

@@ -104,7 +104,7 @@ class DummyView extends Component {
             Math.round(this.dummy.head.x),
             Math.round(this.dummy.head.y),
             Math.round(this.dummy.torso.x),
-            Math.round(this.dummy.torso.y - this.torsoHeight)
+            Math.round(this.dummy.torso.y - this.dummy.torsoHeight)
         );
         this.contextWrapper.fillOval(ctx,
             Math.round(this.dummy.head.x - 16),

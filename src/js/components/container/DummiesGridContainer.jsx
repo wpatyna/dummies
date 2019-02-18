@@ -91,7 +91,7 @@ class DummiesGridContainer extends Component {
 
         for (let i=0; i < (columnSize - dummies.length); i++){
             wrappers.push((
-                <div className={style.dummyWrapper} key={i}/>
+                <div className={style.emptyDummyWrapper} key={i}/>
             ))
         }
 
