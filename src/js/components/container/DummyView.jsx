@@ -154,7 +154,7 @@ class DummyView extends Component {
 
     render() {
         return (
-            <canvas style={{"minWidth": 0, "minHeight": 0, "height": "100%", "width": "100%"}} ref={this.canvasRef} width={128} height={128}/>
+            <canvas style={{"height": this.props.dim, "width": this.props.dim}} ref={this.canvasRef} width={128} height={128}/>
         )
     }
 }

@@ -40,9 +40,9 @@ class App extends Component {
         super();
 
         const targetDummy = new Dummy();
-        const populationSize = 12;
+        const populationSize = 20;
         const mutationProp = 0.1;
-        const selectivePressure = 2;
+        const selectivePressure = 1.5;
         targetDummy.initialize();
         const evolution = new Evolution(targetDummy, populationSize, mutationProp, selectivePressure);
 
@@ -57,7 +57,7 @@ class App extends Component {
             showChart: false,
             history: [],
             settings: {
-                iteration: {description: {pl: "Iteracje", en: "Iteration"}, min: 1, max: 100, step: 1, value: 10},
+                iteration: {description: {pl: "Iteracje", en: "Iteration"}, min: 1, max: 100, step: 1, value: 3},
                 selectivePressure: {
                     description: {pl: "Napór selekcyjny", en: "Selective pressure"},
                     min: 0.1,
@@ -73,7 +73,7 @@ class App extends Component {
                     value: mutationProp
                 },
                 populationSize: {description: {pl: "Rozmiar populacji", en: "Population size"}, min: 4, max: 36, step: 1, value: populationSize},
-                childrenSize: {description: {pl: "Liczonść potomstwa", en: "Children count"}, min: 0, max: evolution.maxChildrenCount, step: 1, value: 1}
+                childrenSize: {description: {pl: "Liczonść potomstwa", en: "Children count"}, min: 0, max: evolution.maxChildrenCount, step: 1, value: evolution.maxChildrenCount}
             }
         };
         window.onresize = (event) => {

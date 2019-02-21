@@ -269,37 +269,44 @@ class Dummy {
                 if (bodyPartKey === Body.head){
 
                     let tmp = this.mutateVar(this[bodyPartKey].x, 7);
-                    if (tmp - 16 >= 0 &&  tmp + 16 <= 128){
+                    while (tmp - 16 < 0 ||  tmp + 16 > 128){
+                        tmp = this.mutateVar(this[bodyPartKey].x, 7);
+                    }
                         this[bodyPartKey].x = tmp;
-                    }
                     tmp = this.mutateVar(this[bodyPartKey].y, 7);
-                    if (tmp - 16 >= 0 && tmp + 16 <= 128){
-                        this[bodyPartKey].y = tmp;
+                    while (tmp - 16 < 0 ||  tmp + 16 > 128){
+                        tmp = this.mutateVar(this[bodyPartKey].y, 7);
                     }
+                    this[bodyPartKey].y = tmp;
                 }else if (bodyPartKey === Body.torso){
 
                     let tmp = this.mutateVar(this[bodyPartKey].x, 7);
-                    if (tmp - this.torsoWidth >= 0 &&  tmp + this.torsoWidth <= 128){
-                        this[bodyPartKey].x = tmp;
+                    while (tmp - this.torsoWidth < 0 || tmp + this.torsoWidth > 128){
+                        tmp = this.mutateVar(this[bodyPartKey].x, 7);
                     }
+                    this[bodyPartKey].x = tmp;
+
                     tmp = this.mutateVar(this[bodyPartKey].y, 7);
-                    if (tmp - this.torsoHeight >= 0 && tmp + this.torsoHeight <= 128){
-                        this[bodyPartKey].y = tmp;
+                    while (tmp - this.torsoHeight < 0 || tmp + this.torsoHeight > 128){
+                        tmp = this.mutateVar(this[bodyPartKey].y, 7);
                     }
+                    this[bodyPartKey].y = tmp;
                 }
                 else if (typeof this.bodyParts[bodyPartKey] === 'object'){
                     this[bodyPartKey].x = this.mutateVar(this[bodyPartKey].x, 7);
                     this[bodyPartKey].y = this.mutateVar(this[bodyPartKey].y, 7);
                 } else if(bodyPartKey === Body.torsoHeight) {
                     let tmp = this.mutateVar(this[bodyPartKey], 6);
-                    if (this.torso.y - tmp >= 0 && this.torso.y + tmp <= 128) {
-                        this[bodyPartKey] = tmp;
+                    while (this.torso.y - tmp < 0 || this.torso.y + tmp > 128) {
+                        tmp = this.mutateVar(this[bodyPartKey], 6);
                     }
+                    this[bodyPartKey] = tmp;
                 } else if(bodyPartKey === Body.torsoWidth) {
                     let tmp = this.mutateVar(this[bodyPartKey], 6);
-                    if (this.torso.x - tmp >= 0 && this.torso.x + tmp <= 128) {
-                        this[bodyPartKey] = tmp;
+                    while (this.torso.x - tmp < 0 || this.torso.x + tmp > 128) {
+                        tmp = this.mutateVar(this[bodyPartKey], 6);
                     }
+                    this[bodyPartKey] = tmp;
                 }
                 else {
                     this[bodyPartKey] = this.mutateVar(this[bodyPartKey], 6);
@@ -318,20 +325,38 @@ class Dummy {
     }
 
     randomize() {
+        this.head = [16 + this._random.nextInt(128 - 16 - 16), 16 + this._random.nextInt(64 - 16 - 16)];
+        this.torsoHeight = this._random.nextInt(63) + 1;
+        this.torsoWidth = this._random.nextInt(63) + 1;
+        this.torso = [this.torsoWidth + this._random.nextInt(128 - 2 * this.torsoWidth), this.torsoHeight + this._random.nextInt(64 - this.torsoHeight)];
+        this.leftHand = [this._random.nextInt(64), this._random.nextInt(64)];
+        this.rightHand = [64 + this._random.nextInt(64), this._random.nextInt(64)];
+        this.leftElbow = [this._random.nextInt(64), this._random.nextInt(64)];
+        this.rightElbow = [64 + this._random.nextInt(64), this._random.nextInt(64)];
+        this.leftArmAngle = this._random.nextInt(63) + 1;
+        this.rightArmAngle = this._random.nextInt(63) + 1;
+        this.leftToe = [this._random.nextInt(64), 64 + this._random.nextInt(64)];
+        this.rightToe = [64 + this._random.nextInt(64), 64 + this._random.nextInt(64)];
+        this.leftHeel = [this._random.nextInt(64), 64 + this._random.nextInt(64)];
+        this.rightHeel = [64 + this._random.nextInt(64), 64 + this._random.nextInt(64)];
+        this.leftKnee = [this._random.nextInt(64), 64 + this._random.nextInt(64)];
+        this.rightKnee = [64 + this._random.nextInt(64), 64 + this._random.nextInt(64)];
+        this.leftLegAngle = this._random.nextInt(63) + 1;
+        this.rightLegAngle = this._random.nextInt(63) + 1;
 
-        Object.keys(this.bodyParts).forEach(part => {
-            if (part === Body.head){
-                this[part] = [16 + this._random.nextInt(128 - 16 - 16), 16 + this._random.nextInt(64 - 16 - 16)];
-            } else if (part === Body.torso){
-                this[part] = [this.torsoWidth + this._random.nextInt(128 - 2 * this.torsoWidth), this.torsoHeight + this._random.nextInt(64 - this.torsoHeight)];
-            }
-            else if (typeof this.bodyParts[part] === 'object'){
-                this[part] = [this._random.nextInt(128), this._random.nextInt(64)];
-            }
-            else {
-                this[part] = this._random.nextInt(63) + 1;
-            }
-        });
+        // Object.keys(this.bodyParts).forEach(part => {
+        //     if (part === Body.head){
+        //         this[part] = [16 + this._random.nextInt(128 - 16 - 16), 16 + this._random.nextInt(64 - 16 - 16)];
+        //     } else if (part === Body.torso){
+        //         this[part] = [this.torsoWidth + this._random.nextInt(128 - 2 * this.torsoWidth), this.torsoHeight + this._random.nextInt(64 - this.torsoHeight)];
+        //     }
+        //     else if (typeof this.bodyParts[part] === 'object'){
+        //         this[part] = [this._random.nextInt(128), this._random.nextInt(64)];
+        //     }
+        //     else {
+        //         this[part] = this._random.nextInt(63) + 1;
+        //     }
+        // });
 
     }
 

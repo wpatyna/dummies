@@ -61,6 +61,7 @@
 .panelButton{
     background: #03A9F4;
     border: 0;
+    padding: 0;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -83,10 +84,13 @@
     background: #03A9F4;
 }
 .upArrow, .rightArrow, .leftArrow, .downArrow{
-    width: 12px;
+    width: 15px;
+    fill: 'white';
 }
 .rotateLeft, .rotateRight, .expandVertically, .narrowVertically, .expandHorizontally, .narrowHorizontally{
     width: 15px;
+    fill: 'white';
+
 }
 
 .biggerIcon{
@@ -104,15 +108,15 @@
     transform: rotate(-90deg);
 }
 
-.rotateRight {
+.rotateLeft {
     transform: scaleY(-1) rotate(180deg);
 }
 
 .expandVertically, .narrowVertically{
-    transform: rotate(135deg);
+    transform: scale(1.7,0.9) rotate(135deg);
 }
 
 
 .expandHorizontally, .narrowHorizontally{
-    transform: rotate(45deg);
+    transform: scale(0.9,1.7) rotate(45deg);
 }
