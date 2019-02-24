@@ -12,16 +12,16 @@ class EvolutionSettingsContainer extends Component {
                 evolve:"Ewoluuj",
                 randomize: "Losuj populację",
                 showChart: "Wykres dopasowania",
-                headCoords: "współrzedne głowy",
-                torsoCoords: "współrzedne tułowia",
+                headCoords: "współrzędne głowy",
+                torsoCoords: "współrzędne tułowia",
                 torsoRadius: "Promienie tułowia",
                 armAngle: "Kąty ramion",
                 legAngle: "Kąty nóg",
-                handCoords: "Współrzedne dłoni",
-                elbowCoords: "Współrzedne łokcia",
-                kneeCoords: "Współrzedne kolana",
-                heelCoords: "Współrzedne pięty",
-                feetCoords: "Współrzedne stóp",
+                handCoords: "Współrzędne dłoni",
+                elbowCoords: "Współrzędne łokcia",
+                kneeCoords: "Współrzędne kolana",
+                heelCoords: "Współrzędne pięty",
+                feetCoords: "Współrzędne stóp",
             },
 
             en: {
@@ -85,16 +85,16 @@ class EvolutionSettingsContainer extends Component {
 
         return (
             <div className={style.details}>
-                <span>{this.translate[language].headCoords}: ({details.head.x}, {details.head.y})</span>
-                <span>{this.translate[language].torsoCoords}: ({details.torso.x}, {details.torso.y})</span>
-                <span>{this.translate[language].torsoRadius}: {details.torsoWidth}, {details.torsoHeight}</span>
-                <span>{this.translate[language].armAngle}: {details.leftArmAngle},{details.rightArmAngle}</span>
-                <span>{this.translate[language].legAngle}: {details.leftLegAngle}, {details.rightLegAngle}</span>
-                <span>{this.translate[language].handCoords}: ({details.leftHand.x}, {details.leftHand.y}), ({details.rightHand.x}, {details.rightHand.y})</span>
-                <span>{this.translate[language].elbowCoords}: ({details.leftElbow.x}, {details.leftElbow.y}), ({details.rightElbow.x}, {details.rightElbow.y})</span>
-                <span>{this.translate[language].kneeCoords}: ({details.leftKnee.x}, {details.leftKnee.y}), ({details.rightKnee.x}, {details.rightKnee.y})</span>
-                <span>{this.translate[language].heelCoords}: ({details.leftHeel.x}, {details.leftHeel.y}), ({details.rightHeel.x}, {details.rightHeel.y})</span>
-                <span>{this.translate[language].feetCoords}: ({details.leftToe.x}, {details.leftToe.y}), ({details.rightToe.x}, {details.rightToe.y})</span>
+                <span>{this.translate[language].headCoords}: ({Math.round(details.head.x)}, {Math.round(details.head.y)})</span>
+                <span>{this.translate[language].torsoCoords}: ({Math.round(details.torso.x)}, {Math.round(details.torso.y)})</span>
+                <span>{this.translate[language].torsoRadius}: {Math.round(details.torsoWidth)}, {Math.round(details.torsoHeight)}</span>
+                <span>{this.translate[language].armAngle}: {Math.round(details.leftArmAngle)},{Math.round(details.rightArmAngle)}</span>
+                <span>{this.translate[language].legAngle}: {Math.round(details.leftLegAngle)}, {Math.round(details.rightLegAngle)}</span>
+                <span>{this.translate[language].handCoords}: ({Math.round(details.leftHand.x)}, {Math.round(details.leftHand.y)}), ({Math.round(details.rightHand.x)}, {Math.round(details.rightHand.y)})</span>
+                <span>{this.translate[language].elbowCoords}: ({Math.round(details.leftElbow.x)}, {Math.round(details.leftElbow.y)}), ({Math.round(details.rightElbow.x)}, {Math.round(details.rightElbow.y)})</span>
+                <span>{this.translate[language].kneeCoords}: ({Math.round(details.leftKnee.x)}, {Math.round(details.leftKnee.y)}), ({Math.round(details.rightKnee.x)}, {Math.round(details.rightKnee.y)})</span>
+                <span>{this.translate[language].heelCoords}: ({Math.round(details.leftHeel.x)}, {Math.round(details.leftHeel.y)}), ({Math.round(details.rightHeel.x)}, {Math.round(details.rightHeel.y)})</span>
+                <span>{this.translate[language].feetCoords}: ({Math.round(details.leftToe.x)}, {Math.round(details.leftToe.y)}), ({Math.round(details.rightToe.x)}, {Math.round(details.rightToe.y)})</span>
 
             </div>
         )

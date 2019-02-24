@@ -57,7 +57,7 @@ class App extends Component {
             showChart: false,
             history: [],
             settings: {
-                iteration: {description: {pl: "Iteracje", en: "Iteration"}, min: 1, max: 100, step: 1, value: 3},
+                iteration: {description: {pl: "Pokolenia na jeden krok", en: "Generations per step"}, min: 1, max: 100, step: 1, value: 50},
                 selectivePressure: {
                     description: {pl: "Napór selekcyjny", en: "Selective pressure"},
                     min: 0.1,

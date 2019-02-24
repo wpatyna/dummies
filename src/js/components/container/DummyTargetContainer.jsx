@@ -76,8 +76,8 @@ class DummyTargetContainer extends Component {
                 right: true,
             },
             turnable: {
-                turnLeft: true,
-                turnRight: true,
+                left: true,
+                right: true,
             }
         }
     }
@@ -178,10 +178,10 @@ class DummyTargetContainer extends Component {
                 <div className={style.panelButtonContainer}>
                     <button className={style.panelButton} onClick={this.upButtonClicked} disabled={!buttons.up} title={this.translate[language].up}><img className={style.upArrow} src={arrowLeft}/></button>
                     <button className={style.panelButton} onClick={this.downButtonClicked} disabled={!buttons.down} title={this.translate[language].down}><img className={style.downArrow} src={arrowLeft}/></button>
-                    <button className={style.panelButton} onClick={this.rightButtonClicked} disabled={!buttons.right} title={this.translate[language].right}><img className={style.rightArrow} src={arrowLeft}/></button>
                     <button className={style.panelButton} onClick={this.leftButtonClicked} disabled={!buttons.left} title={this.translate[language].left}><img className={style.leftArrow} src={arrowLeft}/></button>
-                    <button className={style.panelButton} onClick={this.turnLeftButtonClicked} disabled={!buttons.turnLeft} title={this.translate[language].turnLeft}><img className={style.rotateLeft} src={rotateLeft}/></button>
-                    <button className={style.panelButton} onClick={this.turnRightButtonClicked} disabled={!buttons.turnRight} title={this.translate[language].turnRight}><img className={style.rotateRight} src={rotateLeft}/></button>
+                    <button className={style.panelButton} onClick={this.rightButtonClicked} disabled={!buttons.right} title={this.translate[language].right}><img className={style.rightArrow} src={arrowLeft}/></button>
+                    {/*<button className={style.panelButton} onClick={this.turnLeftButtonClicked} disabled={!buttons.turnLeft} title={this.translate[language].turnLeft}><img className={style.rotateLeft} src={rotateLeft}/></button>*/}
+                    {/*<button className={style.panelButton} onClick={this.turnRightButtonClicked} disabled={!buttons.turnRight} title={this.translate[language].turnRight}><img className={style.rotateRight} src={rotateLeft}/></button>*/}
                     <button className={style.panelButton} onClick={this.expandVerticallyButtonClicked} disabled={!buttons.expandVertically} title={this.translate[language].expandVertically}><img className={style.expandVertically} src={expand}/>
                     </button>
                     <button className={style.panelButton} onClick={this.narrowVerticallyButtonClicked} disabled={!buttons.narrowVertically} title={this.translate[language].narrowVertically}><img className={style.narrowVertically} src={narrow}/>
@@ -362,66 +362,89 @@ class DummyTargetContainer extends Component {
 
     upButtonClicked = (event) => {
         let point = this.props.dummy[this.state.focused];
-        this.props.dummy[this.state.focused] = [point.x, point.y - 1];
+        this.props.dummy[this.state.focused] = [point.x, point.y - 2];
         point = this.props.dummy[this.state.focused];
         this.props.onChange({[this.state.focused]: new Point(point.x, point.y)});
     };
 
     downButtonClicked = (event) => {
         let point = this.props.dummy[this.state.focused];
-        this.props.dummy[this.state.focused] = [point.x, point.y + 1];
+        this.props.dummy[this.state.focused] = [point.x, point.y + 2];
         point = this.props.dummy[this.state.focused];
 
         this.props.onChange({[this.state.focused]: new Point(point.x, point.y)});
     };
 
     rightButtonClicked = (event) => {
-        let point = this.props.dummy[this.state.focused];
-        this.props.dummy[this.state.focused] = [point.x + 1, point.y];
-        point = this.props.dummy[this.state.focused];
+        if ([Body.rightLegAngle,Body.rightArmAngle].indexOf(this.state.focused) !== -1){
+            this.props.dummy[this.state.focused] += 3;
 
-        this.props.onChange({[this.state.focused]: new Point(point.x, point.y)});
+            this.props.onChange({[this.state.focused]: this.props.dummy[this.state.focused]});
+
+        }else if ([Body.leftLegAngle, Body.leftArmAngle].indexOf(this.state.focused) !== -1){
+            this.props.dummy[this.state.focused] -= 3;
+
+            this.props.onChange({[this.state.focused]: this.props.dummy[this.state.focused]});
+
+        }else {
+            let point = this.props.dummy[this.state.focused];
+            this.props.dummy[this.state.focused] = [point.x + 2, point.y];
+            point = this.props.dummy[this.state.focused];
+
+            this.props.onChange({[this.state.focused]: new Point(point.x, point.y)});
+        }
     };
 
     leftButtonClicked = (event) => {
-        let point = this.props.dummy[this.state.focused];
-        this.props.dummy[this.state.focused] = [point.x - 1, point.y];
-        point = this.props.dummy[this.state.focused];
+        if ([Body.rightLegAngle,Body.rightArmAngle].indexOf(this.state.focused) !== -1){
+            this.props.dummy[this.state.focused] -= 3;
 
-        this.props.onChange({[this.state.focused]: new Point(point.x, point.y)});
+            this.props.onChange({[this.state.focused]: this.props.dummy[this.state.focused]});
+
+        }else if ([Body.leftLegAngle, Body.leftArmAngle].indexOf(this.state.focused) !== -1){
+            this.props.dummy[this.state.focused] += 3;
+            this.props.onChange({[this.state.focused]: this.props.dummy[this.state.focused]});
+
+        }else {
+            let point = this.props.dummy[this.state.focused];
+            this.props.dummy[this.state.focused] = [point.x - 2, point.y];
+            point = this.props.dummy[this.state.focused];
+
+            this.props.onChange({[this.state.focused]: new Point(point.x, point.y)});
+        }
     };
 
-    turnLeftButtonClicked = (event) => {
-        this.props.dummy[this.state.focused] -= 1;
-
-        this.props.onChange({[this.state.focused]: this.props.dummy[this.state.focused]});
-    };
+    // turnLeftButtonClicked = (event) => {
+    //     this.props.dummy[this.state.focused] -= 2;
+    //
+    //     this.props.onChange({[this.state.focused]: this.props.dummy[this.state.focused]});
+    // };
 
     turnRightButtonClicked = (event) => {
-        this.props.dummy[this.state.focused] += 1;
+        this.props.dummy[this.state.focused] += 2;
 
         this.props.onChange({[this.state.focused]: this.props.dummy[this.state.focused]});
 
     };
 
     expandVerticallyButtonClicked = (event) => {
-        this.props.dummy.torsoHeight = this.props.dummy.torsoHeight + 1;
+        this.props.dummy.torsoHeight = this.props.dummy.torsoHeight + 2;
         this.props.onChange({"torsoHeight": this.props.dummy.torsoHeight});
     };
 
     narrowVerticallyButtonClicked = (event) => {
-        this.props.dummy.torsoHeight = this.props.dummy.torsoHeight - 1;
+        this.props.dummy.torsoHeight = this.props.dummy.torsoHeight - 2;
         this.props.onChange({"torsoHeight": this.props.dummy.torsoHeight});
     };
 
     expandHorizontallyButtonClicked = (event) => {
-        this.props.dummy.torsoWidth += 1;
+        this.props.dummy.torsoWidth += 2;
         this.props.onChange({"torsoWidth": this.props.dummy.torsoWidth});
 
     };
 
     narrowHorizontallyButtonClicked = (event) => {
-        this.props.dummy.torsoWidth -= 1;
+        this.props.dummy.torsoWidth -= 2;
         this.props.onChange({"torsoWidth": this.props.dummy.torsoWidth});
 
     };

@@ -23,7 +23,7 @@ class DummyViewWrapper extends Component {
     render() {
         const focused = this.props.focused;
         return (
-            <div onClick={this.handleClick} className={`${style.dummyWrapper} ${ focused ? style.focused : ""} `}>
+            <div onMouseEnter={this.handleClick} className={`${style.dummyWrapper} ${ focused ? style.focused : ""} `}>
                 <DummyView dummy={this.props.dummy} dim={this.props.dim}/>
             </div>
         )
@@ -59,10 +59,10 @@ class DummiesGridContainer extends Component {
         });
         const focused = this.props.focusedDummy;
         return (
-            <div  ref={this.container}  className={style.container}>
-                {/*<div className={style.squareContainer}>*/}
+            <div  ref={this.container} className={style.container}>
+                <div className={style.squareContainer} onMouseLeave={this.hideDetails} >
                     {this.renderGrid(dummies, focused, dim)}
-                {/*</div>*/}
+                </div>
             </div>
         )
     }
@@ -73,9 +73,9 @@ class DummiesGridContainer extends Component {
         if (Math.pow(columnSize, 2) - dummies.length >= columnSize) {
             columnCount -= 1;
         }
-        let maxDim = Math.floor(dim.width / columnCount) - 1;
+        let maxDim = Math.floor(dim.width / columnCount) - 2;
         if ((maxDim * columnSize) > dim.height ){
-            maxDim = Math.floor(dim.height / columnSize) - 1;
+            maxDim = Math.floor(dim.height / columnSize) - 2;
         }
         const grid = [];
         for (let i = 0; i < columnCount; i++) {
@@ -86,11 +86,6 @@ class DummiesGridContainer extends Component {
             );
 
         }
-        // if (columnSize > columnCount){
-        //     grid.push(
-        //         <div className={style.column} key={grid.length}/>
-        //     );
-        // }
         return grid
 
     };
@@ -111,11 +106,15 @@ class DummiesGridContainer extends Component {
 
         return wrappers;
 
-    }
+    };
 
     showDetails = (event) => {
         this.props.onShowDetails(event);
-    }
+    };
+
+    hideDetails = () => {
+        this.props.onShowDetails({});
+    };
 
 }
 

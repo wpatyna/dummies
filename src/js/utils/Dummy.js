@@ -55,7 +55,7 @@ class Dummy {
     }
 
     set torso(coord) {
-        if (coord[0] < 128 && coord[0] >= 0 && coord[1] < 128 && coord[1] >= 0) {
+        if (coord[0] + this.torsoWidth <= 128 && coord[0] - this.torsoWidth  >= 0 && coord[1] + this.torsoHeight <= 128 && coord[1] - this.torsoHeight >= 0) {
             this._torso.x = coord[0];
             this._torso.y = coord[1];
         }
@@ -66,7 +66,7 @@ class Dummy {
     }
 
     set leftLegAngle(leftLegAngle) {
-        if (leftLegAngle <= 63 && leftLegAngle >= 0) {
+        if (leftLegAngle <= 63 && leftLegAngle > 0) {
             this._leftLegAngle = leftLegAngle;
         }
     }
@@ -76,7 +76,7 @@ class Dummy {
     }
 
     set rightLegAngle(rightLegAngle) {
-        if (rightLegAngle <= 63 && rightLegAngle >= 0) {
+        if (rightLegAngle <= 63 && rightLegAngle > 0) {
             this._rightLegAngle = rightLegAngle;
         }
     }
@@ -152,7 +152,7 @@ class Dummy {
     }
 
     set leftArmAngle(leftArmAngle) {
-        if (leftArmAngle <= 63 && leftArmAngle >= 0) {
+        if (leftArmAngle <= 63 && leftArmAngle > 0) {
             this._leftArmAngle = leftArmAngle;
         }
     }
@@ -162,7 +162,7 @@ class Dummy {
     }
 
     set rightArmAngle(rightArmAngle) {
-        if (rightArmAngle <= 63 && rightArmAngle >= 0) {
+        if (rightArmAngle <= 63 && rightArmAngle > 0) {
             this._rightArmAngle = rightArmAngle;
         }
     }
@@ -216,7 +216,7 @@ class Dummy {
     }
 
     set head(coord) {
-        if (coord[0] < 128 && coord[0] >= 0 && coord[1] < 128 && coord[1] >= 0) {
+        if (coord[0] + 16 <= 128 && coord[0] - 16 >= 0 && coord[1] + 16 <= 128 && coord[1] - 16 >= 0) {
             this._head.x = coord[0];
             this._head.y = coord[1];
         }
@@ -248,15 +248,25 @@ class Dummy {
 
     crossover(dummy) {
         let child = new Dummy();
-        Object.keys(child.bodyParts).forEach(part => {
-            if (typeof child.bodyParts[part] === "object"){
-                child[part] = [(this.bodyParts[part].x + dummy.bodyParts[part].x) / 2, (this.bodyParts[part].y + dummy.bodyParts[part].y) / 2]
-            }
-            else {
-                child[part] = (this.bodyParts[part] + dummy.bodyParts[part]) / 2;
+        child.torsoHeight = (this.torsoHeight + dummy.torsoHeight) / 2;
+        child.torsoWidth = (this.torsoWidth + dummy.torsoWidth) / 2;
+        child.head = [(this.head.x + dummy.head.x) / 2, (this.head.y + dummy.head.y) / 2];
+        child.torso = [(this.torso.x + dummy.torso.x) / 2, (this.torso.y + dummy.torso.y) / 2];
+        child.leftArmAngle = (this.leftArmAngle + dummy.leftArmAngle) / 2;
+        child.leftElbow = [(this.leftElbow.x + dummy.leftElbow.x) / 2, (this.leftElbow.y + dummy.leftElbow.y) / 2];
+        child.leftHand = [(this.leftHand.x + dummy.leftHand.x) / 2, (this.leftHand.y + dummy.leftHand.y) / 2];
+        child.leftHeel = [(this.leftHeel.x + dummy.leftHeel.x) / 2, (this.leftHeel.y + dummy.leftHeel.y) / 2];
+        child.leftKnee = [(this.leftKnee.x + dummy.leftKnee.x) / 2, (this.leftKnee.y + dummy.leftKnee.y) / 2];
+        child.leftLegAngle = (this.leftLegAngle + dummy.leftLegAngle) / 2;
+        child.leftToe = [(this.leftToe.x + dummy.leftToe.x) / 2, (this.leftToe.y + dummy.leftToe.y) / 2];
+        child.rightArmAngle = (this.rightArmAngle + dummy.rightArmAngle) / 2;
+        child.rightElbow = [(this.rightElbow.x + dummy.rightElbow.x) / 2, (this.rightElbow.y + dummy.rightElbow.y) / 2];
+        child.rightHand = [(this.rightHand.x + dummy.rightHand.x) / 2, (this.rightHand.y + dummy.rightHand.y) / 2];
+        child.rightHeel = [(this.rightHeel.x + dummy.rightHeel.x) / 2, (this.rightHeel.y + dummy.rightHeel.y) / 2];
+        child.rightKnee = [(this.rightKnee.x + dummy.rightKnee.x) / 2, (this.rightKnee.y + dummy.rightKnee.y) / 2];
+        child.rightLegAngle = (this.rightLegAngle + dummy.rightLegAngle) / 2;
+        child.rightToe = [(this.rightToe.x + dummy.rightToe.x) / 2, (this.rightToe.y + dummy.rightToe.y) / 2];
 
-            }
-        });
         return child;
     }
 
@@ -361,9 +371,9 @@ class Dummy {
     }
 
     initialize() {
-        this.torso = [63,73];
         this.torsoHeight = 30;
         this.torsoWidth = 25;
+        this.torso = [63,73];
         this.leftLegAngle = 60;
         this.leftKnee = [23, 103];
         this.leftHeel = [33,123];
@@ -373,12 +383,12 @@ class Dummy {
         this.rightHeel = [93, 123];
         this.rightToe = [113, 125];
         this.leftArmAngle = 20;
-        this.leftElbow = [13, 43];
-        this.leftHand = [3, 73];
+        this.leftElbow = [23, 38];
+        this.leftHand = [11, 15];
         this.rightArmAngle = 20;
-        this.rightElbow = [113, 43];
-        this.rightHand = [123, 73];
-        this.head = [63, 20];
+        this.rightElbow = [106, 51];
+        this.rightHand = [121, 73];
+        this.head = [71, 20];
     }
 
     calculateLimbPosition(degree){
@@ -417,7 +427,7 @@ class Dummy {
             if (typeof this.bodyParts[part] === 'object'){
                 distance += this.bodyParts[part].calculateEuclideanDistance(target[part])
             } else {
-                distance += Math.abs(this.bodyParts[part] - target[part])
+                distance += Math.abs(this.bodyParts[part] - target[part]);
             }
         });
 
