@@ -42,7 +42,7 @@ class App extends Component {
         const targetDummy = new Dummy();
         const populationSize = 20;
         const mutationProp = 0.1;
-        const selectivePressure = 1.5;
+        const selectivePressure = 2;
         targetDummy.initialize();
         const evolution = new Evolution(targetDummy, populationSize, mutationProp, selectivePressure);
 
@@ -132,7 +132,7 @@ class App extends Component {
 
 
     showChart = () => {
-        this.setState({showChart: true, history: [...this.state.evolution.statisticsHistory]})
+        this.setState({showChart: !this.state.showChart, history: [...this.state.evolution.statisticsHistory]})
     };
 
     hideChart = () => {
