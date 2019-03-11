@@ -21,25 +21,27 @@ class Chart extends Component {
 
     render() {
         const {history, language} = this.props;
-        const data = [{
-            type: "line",
-            lineThickness: 2.5,
-            dataPoints: history.map((point) => {
+        const data = [
+            {
+                type: "error",
+                lineColor: "rgba(224, 35, 35, 0.6)",
+                stemColor: "rgba(224, 35, 35, 0.6)",
+                whiskerColor: "rgba(224, 35, 35, 0.6)",
+                whiskerLength: 10,
+                whiskerThickness: 0.5,
+                stemThickness: 0.5,
+                dataPoints: history.map((point, i) => {
+                    return {y: [point.distance - point.std / 2, point.distance + point.std / 2]}
+                })
+            }, {
+                lineColor: "rgb(2,119,189)",
+                markerColor: "rgb(2,119,189)",
+                type: "line",
+                lineThickness: 2,
+                dataPoints: history.map((point) => {
                     return {y: point.distance}
                 })
-        },
-            {
-            type: "error",
-            lineColor: "rgba(224, 35, 35, 0.6)",
-            stemColor: "rgba(224, 35, 35, 0.6)",
-            whiskerColor: "rgba(224, 35, 35, 0.6)",
-            whiskerLength: 10,
-            whiskerThickness: 0.5,
-            stemThickness:0.5,
-            dataPoints: history.map((point, i) => {
-                return {y: [point.distance - point.std / 2, point.distance + point.std / 2]}
-            })
-        }
+            }
         ];
 
         const spanStyle = {
